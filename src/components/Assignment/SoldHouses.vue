@@ -1,17 +1,17 @@
 <template>
     <div class="row">
-        <!-- <House :houses="houses" etat="4"></House> -->
+        <sold-or-rented :houses="houses" etat="5"></sold-or-rented>
     </div>
 </template>
 
 <script>
 
 import Service from '../../Service'
-// import House from './House.vue';
+import SoldOrRented from './SoldOrRented.vue'
 
 export default {
     name : 'SoldHouses',
-    // components : { House } ,
+    components : { SoldOrRented } ,
     data(){
         return{
             houses : [],
@@ -23,7 +23,7 @@ export default {
     methods : {
         loadHouses : async function(){
             var service = new Service()
-            await service.loadhousestoappraise( 4 , ( data ) => {
+            await service.loadSoldHouses( ( data ) => {
                 this.houses = data
             })
         },

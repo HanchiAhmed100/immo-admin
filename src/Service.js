@@ -303,6 +303,33 @@ export default class Service {
             return null
         })
     }
+    async ValidateLocation( dateDebut , maisonId , id , callback ){
+        await axios.post(`http://localhost:8081/api/transaction/validate_location/${id}`,{            
+            maisonId : maisonId,
+            dateDebut : dateDebut ,
+        })
+        .then(res =>{
+            callback(res)
+        })
+        .catch(err =>{
+            console.log(err)
+            return null
+        })
+    }
+    async ValidateVente( dateDebut , maisonId , id , callback ){
+        await axios.post(`http://localhost:8081/api/transaction/validate_vente/${id}`,{            
+            maisonId : maisonId,
+            dateDebut : dateDebut ,
+        })
+        .then(res =>{
+            callback(res)
+        })
+        .catch(err =>{
+            console.log(err)
+            return null
+        })
+    }
+    
 }
 
 

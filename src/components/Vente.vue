@@ -33,18 +33,32 @@
                     <table class="table table-striped text-left">
                         <thead>
                             <tr>
+                                <th> Etat </th>
                                 <th> Logement </th>
                                 <th> Adresse </th>
-
                                 <th> Propiataire </th>
                                 <th> Demandeur </th>
                                 <th> Prix </th>
                                 <th> Date </th>
                                 <th> Fichier </th>
+                                <th> Action </th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="element in demandes" :key="element.id">
+                                <td>
+                                    <span v-if="element.etat">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>     
+                                    </span> 
+                                    <span v-else>
+                                        <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </span>
+                                </td>
                                 <td> {{ element.maison.type_log }} S+{{element.maison.nbr_chambre}} {{element.surface}}m²</td>
                                 <td> {{ element.maison.adresse.adresse }}</td>
                                 <td> {{ element.maison.user.nom }} {{ element.maison.user.prenom }} </td>
@@ -59,9 +73,37 @@
                                         </svg>
                                     </a>
                                 </td>
+                                <td v-on:click="setContrat(element)">
+                                    <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="setContrat(element)" data-toggle="modal" data-target="#ValidatesaleModel">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ValidatesaleModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="demandeToValidate.length != 0">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Validation de la demande</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-left">
+                        <p> Valider la vente de l'immobilier de  <b v-if="demandeToValidate.maison.user">{{ demandeToValidate.maison.user.nom }} {{ demandeToValidate.maison.user.prenom }}</b> par : <b v-if="demandeToValidate.user"> {{ demandeToValidate.user.nom }} {{ demandeToValidate.user.nom }} </b> </p><br/>
+                        
+                        <label>Date prevu du debut de la vente :</label>
+                        <date-picker input-class="form-control" style="width:100%" v-model="startDate" ></date-picker>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-light btn-fw" data-dismiss="modal">Annuler</button>
+                        <button class="btn btn-outline-info btn-fw" v-on:click="ValidateDemande" data-dismiss="modal">Valider</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,13 +113,18 @@
 <script>
 import Service from '../Service'
 import moment from 'moment'
+import DatePicker from 'vue2-datepicker';
 
 export default {
     name : 'Vente',
+    components : {  DatePicker  } ,
+
     data(){
         return{
             houses : [],
             demandes : [],
+            demandeToValidate : [],
+            startDate : null,
             house : true,
             demande : false
         }
@@ -107,9 +154,19 @@ export default {
             this.house = false
             this.demande = true
         },
+        setContrat : function(ele){
+            this.demandeToValidate = ele
+        },
         ShowHouses : function(){
             this.house = true
             this.demande = false
+        },
+        ValidateDemande : async function(){
+            var service = new Service()
+            await service.ValidateVente(  this.startDate , this.demandeToValidate.maisonId , this.demandeToValidate.id, ( res ) => {
+                console.log(res)
+                this.getDemande()                
+            })
         },
         formateDate : function( date ){
             return moment(date).format('L');

@@ -30,9 +30,9 @@
                     <table class="table table-striped text-left">
                         <thead>
                             <tr>
+                                <th> Etat </th>
                                 <th> Logement </th>
                                 <th> Adresse </th>
-
                                 <th> Propiataire </th>
                                 <th> Demandeur </th>
                                 <th> Prix </th>
@@ -44,6 +44,18 @@
                         </thead>
                         <tbody>
                             <tr v-for="element in demandes" :key="element.id">
+                                <td>
+                                     <span v-if="element.etat">
+                                        <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                        </svg>     
+                                     </span> 
+                                     <span v-else>
+                                        <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                     </span>
+                                </td>
                                 <td> {{ element.maison.type_log }} S+{{element.maison.nbr_chambre}} {{element.surface}}m²  </td>
                                 <td> {{ element.maison.adresse.adresse }}</td>
                                 <td> {{ element.maison.user.nom }} {{ element.maison.user.prenom }} </td>
@@ -58,13 +70,10 @@
                                         </svg>
                                     </a>
                                 </td>
-                                <td>
-                                    <a :href="'http://localhost:8081/images/'+element.description"  target="_blank">
+                                <td v-on:click="setContrat(element)">
                                         <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="setContrat(element)" data-toggle="modal" data-target="#ValidateLocationModel">
                                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
-
-                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -72,41 +81,48 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="modal fade" id="ValidateLocationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="ValidateLocationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" v-if="demandeToValidate.length != 0">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Alerte</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Validation de la demande</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <p> Etez vous sur de vouloir supprimer l'expert : <b> {{ OneExpert.fullname }} </b> </p>
+                    <div class="modal-body text-left">
+                        <p> Valider la location de l'immobilier de  <b v-if="demandeToValidate.maison.user">{{ demandeToValidate.maison.user.nom }} {{ demandeToValidate.maison.user.prenom }}</b> par : <b v-if="demandeToValidate.user"> {{ demandeToValidate.user.nom }} {{ demandeToValidate.user.nom }} </b> </p><br/>
+                        
+                        <label>Date prevu du debut de la location :</label>
+                        <date-picker input-class="form-control" style="width:100%" v-model="startDate" ></date-picker>
 
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-outline-light btn-fw" data-dismiss="modal">Annuler</button>
-                        <button class="btn btn-outline-danger btn-fw" v-on:click="deleteExpert" data-dismiss="modal">Supprimer</button>
+                        <button class="btn btn-outline-info btn-fw" v-on:click="ValidateDemande" data-dismiss="modal">Valider</button>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script>
 import Service from '../Service'
 import moment from 'moment'
+import DatePicker from 'vue2-datepicker';
 
 export default {
     name : 'Location',
+    components : {  DatePicker  } ,
     data(){
         return{
             locations : [],
             demandes : [],
+            demandeToValidate : [],
             location : true,
-            demande : false
+            demande : false,
+            startDate : null
         }
     },
     created(){
@@ -139,7 +155,14 @@ export default {
             this.demande = false
         },
         setContrat : function(ele){
-            console.log(ele)
+            this.demandeToValidate = ele
+        },
+        ValidateDemande : async function(){
+            var service = new Service()
+            await service.ValidateLocation(  this.startDate , this.demandeToValidate.maisonId , this.demandeToValidate.id, ( res ) => {
+                console.log(res)
+                this.getDemande()                
+            })
         },
         formateDate : function( date ){
             return moment(date).format('L');

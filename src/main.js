@@ -10,6 +10,8 @@ import 'vue2-datepicker/index.css';
 
 import './assets/style.css'
 
+import VueApexCharts from 'vue-apexcharts'
+
 import { Icon } from 'leaflet';
 delete Icon.Default.prototype._getIconUrl;
 
@@ -18,6 +20,13 @@ Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
+
+
+
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
+
 
 Vue.config.productionTip = false
 
