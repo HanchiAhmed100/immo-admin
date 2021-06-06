@@ -1,5 +1,9 @@
 # admin-app
 
+## Project Demo Link 
+
+[Demo](https://hanchiahmed100.github.io/immo-admin/)
+
 ## Project setup
 ```
 npm install
