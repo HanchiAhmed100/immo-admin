@@ -60,12 +60,12 @@
                         </thead>
                         <tbody>
                             <tr v-for="element in demandes" :key="element.id">
-                                <td v-if="element.user" class="pointer" v-on:click="goToProfile(element.user.id)" > <img :src="'http://localhost:8081/images/profile/'+element.user.image" alt="image"/>  {{ element.user.prenom }} {{ element.user.nom }}  </td>
+                                <td v-if="element.user" class="pointer" v-on:click="goToProfile(element.user.id)" > <img :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+element.user.image" alt="image"/>  {{ element.user.prenom }} {{ element.user.nom }}  </td>
                                 <td> {{ annonce.contrat }} </td>
                                 <td> {{ element.prix }}  DT <span v-if="annonce.contrat == 'location'"> / Mois </span> </td>
                                 <td> {{ formateDate(element.createdAt) }}</td>
                                 <td>
-                                    <a :href="'http://localhost:8081/images/'+element.description"  target="_blank">
+                                    <a :href="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+element.description"  target="_blank">
                                         <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
@@ -188,7 +188,7 @@ export default {
             images : [],
             image : '',
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            serverUrl : 'http://localhost:8081/images/',
+            serverUrl : 'https://immo-app-hanchi-ahmed.herokuapp.com/images/',
             zoom: 11,
             lating: [0 ,0],
             tags : [],
@@ -214,7 +214,7 @@ export default {
             })
         },
         setData : function(){
-            this.image  = 'http://localhost:8081/images/profile/'+this.annonce.user.image
+            this.image  = 'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+this.annonce.user.image
             let marks = new Array(this.annonce.latitude , this.annonce.longitude)
             this.lating = marks
             this.images = this.annonce.images[0].url.split("|")

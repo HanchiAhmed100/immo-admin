@@ -6,7 +6,7 @@
                 <div class="col-lg-4">
                     <div class="mycard  p-3">
                         <div class="text-center pb-4 border-bottom ">
-                            <img :src="'http://localhost:8081/images/profile/'+user.image" alt="profile" class="img-lg rounded-circle mb-3"/>
+                            <img :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+user.image" alt="profile" class="img-lg rounded-circle mb-3"/>
                             <div class="mb-3">
                                 <h3> 
                                     <svg v-if="user.verif" xmlns="http://www.w3.org/2000/svg" style="width : 20px ; height : 20px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,7 @@
                                         <td> {{ element.prix }} </td>
                                         <td> {{ formateDate(element.createdAt) }} </td>
                                         <td>
-                                            <a :href="'http://localhost:8081/images/'+element.description">
+                                            <a :href="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+element.description">
                                                 <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                 </svg>
@@ -91,7 +91,7 @@
                                         <td> {{ element.prix }} </td>
                                         <td> {{ formateDate(element.createdAt) }}</td>
                                         <td>
-                                            <a :href="'http://localhost:8081/images/'+element.description"  target="_blank">
+                                            <a :href="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+element.description"  target="_blank">
                                                 <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                 </svg>
@@ -108,17 +108,17 @@
                             <h4>{{ house.type_log}} S+{{house.nbr_chambre}} {{house.surface}}m²  <span style="float:right" class="badge badge-info"> {{house.contrat}} </span></h4>
                             <h5>Adresse : {{ house.adresse.adresse }} - {{house.adresse.gouvernerat }} </h5>
                             <hr />
-                            <h5>{{ house.description }}</h5>
+                            <h5>Description : {{ house.description }}</h5>
                             <!-- {{ house.adresse.rue }} {{ house.adresse.ville}} {{ house.adresse.quartier }}  -->
                                 <div class="row pt-3">
                                     <div class="col-sm-4" >
-                                        <img  style=" height : 150px ; width : 175px"  :src="'http://localhost:8081/images/'+getImages( house.images[0].url , 0 )" alt="sample" class="rounded" />                            
+                                        <img  style=" height : 150px ; width : 175px"  :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+getImages( house.images[0].url , 0 )" alt="Image" class="rounded"  target="_blank" />                            
                                     </div>
                                     <div class="col-sm-4">
-                                        <img style=" height : 150px ; width : 175px" :src="'http://localhost:8081/images/'+getImages( house.images[0].url , 1 )" alt="sample" class="rounded" />                            
+                                        <img style=" height : 150px ; width : 175px" :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+getImages( house.images[0].url , 1 )" alt="Image" class="rounded"  target="_blank" />                            
                                     </div>
                                     <div class="col-sm-4">
-                                        <img style=" height : 150px ; width : 175px" :src="'http://localhost:8081/images/'+getImages( house.images[0].url , 2 )" alt="sample" class="rounded" />                            
+                                        <img style=" height : 150px ; width : 175px" :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+getImages( house.images[0].url , 2 )" alt="Image" class="rounded"  target="_blank" />                            
                                     </div>
                                 </div>
                             

@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for=" element in Users " :key="element.id">
-                                    <td class="py-1"> <img :src="'http://localhost:8081/images/profile/'+element.image" alt="image"/> </td>
+                                    <td class="py-1"> <img :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+element.image" alt="image"/> </td>
                                     <td class="py-1"> {{ element.nom }} {{ element.prenom }} </td>
                                     <td> {{ element.email }} </td>
                                     <td> {{ element.telephone }} </td>

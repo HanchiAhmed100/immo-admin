@@ -14,12 +14,12 @@
             </div>
         </div>
         <div class="card-columns" v-if="location">
-            <div class="card text-left" v-for="location in locations " :key="location.id" v-on:click="goToAnnonce(location.id)">
-                <img class="card-img-top" :src="'http://localhost:8081/images/'+getImages( location.images[0].url )"  alt="Card image cap">                            
+            <div class="card text-left" v-for="loc in locations " :key="loc.id" v-on:click="goToAnnonce(loc.id)">
+                <img class="card-img-top" :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+getImages( loc )"  alt="image ">                            
                 <div class="card-body">
-                    <h4 class="card-title mt-3">{{ location.type_log }} S+{{location.nbr_chambre}} {{ location.surface}}m² <br />  {{ location.prix }} DT </h4>
-                    <b class="card-text"> {{location.adresse.adresse}} </b>
-                    <p class="card-text mt-2"> {{location.description}} </p>
+                    <h4 class="card-title mt-3">{{ loc.type_log }} S+{{loc.nbr_chambre}} {{ loc.surface}}m² <br />  {{ loc.prix }} DT </h4>
+                    <b class="card-text"> {{loc.adresse.adresse}} </b>
+                    <p class="card-text mt-2"> {{loc.description}} </p>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                                 <td> {{ element.prix }} DT </td>
                                 <td> {{ formateDate(element.createdAt) }} </td>
                                 <td>
-                                    <a :href="'http://localhost:8081/images/'+element.description"  target="_blank">
+                                    <a :href="'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+element.description"  target="_blank">
                                         <svg  xmlns="http://www.w3.org/2000/svg" style="width : 25px ; height : 25px" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-on:click="ShowUser(element.id)">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                         </svg>
@@ -142,10 +142,6 @@ export default {
                 this.demandes = res
             }) 
         },
-        getImages : function( data ){
-            var array = data.split("|")
-            return array[0]
-        },
         ShowDemandes : function(){
             this.location = false
             this.demande = true
@@ -166,6 +162,11 @@ export default {
         },
         formateDate : function( date ){
             return moment(date).format('L');
+        },
+        getImages : function( data ){
+            console.log(data)
+            var array = data.images[0].url.split("|")
+            return array[0]
         },
         goToAnnonce(id){
             this.$router.push({ name : 'Annonce' , params : { id }})

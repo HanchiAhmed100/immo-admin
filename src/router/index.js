@@ -17,6 +17,7 @@ const routes = [
     children: [
       {
         path: '/',
+        name: 'Statistique',
         component: () => import('../components/Statistique.vue'),
       },{
         path: '/admin',

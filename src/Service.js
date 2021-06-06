@@ -3,7 +3,7 @@ import axios from  'axios'
 export default class Service {
 
     async AdminLogin( mail , password , callback ){
-        await axios.post("http://localhost:8081/api/admin/login", {
+        await axios.post("https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/login", {
             email : mail ,
             password : password,   
         })
@@ -16,7 +16,7 @@ export default class Service {
         })
     }
     async AdminLoadAll( callback ){
-        await axios.get("http://localhost:8081/api/admin/")
+        await axios.get("https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/")
         .then(res =>{
             callback(res.data)
         })
@@ -26,7 +26,7 @@ export default class Service {
         })
     }
     async AdminLoadOne( id , callback ){
-        await axios.get(`http://localhost:8081/api/admin/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -36,7 +36,7 @@ export default class Service {
         })
     }
     async AdminSignUp( fullname , mail , password , callback ){
-        await axios.post("http://localhost:8081/api/admin/signup", {
+        await axios.post("https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/signup", {
             fullname : fullname,
             email : mail ,
             password : password,   
@@ -50,7 +50,7 @@ export default class Service {
         })
     }
     async AdminDelete( id , callback ){
-        await axios.delete(`http://localhost:8081/api/admin/${id}`)
+        await axios.delete(`https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -60,7 +60,7 @@ export default class Service {
         })
     }
     async AdminUpdate( fullname , mail ,password , id , callback ){
-        await axios.put(`http://localhost:8081/api/admin/${id}`,{            
+        await axios.put(`https://immo-app-hanchi-ahmed.herokuapp.com/api/admin/${id}`,{            
             fullname : fullname,
             email : mail ,
             password : password,   
@@ -75,7 +75,7 @@ export default class Service {
     }
 
     async ExpertLoadAll( callback ){
-        await axios.get("http://localhost:8081/api/expert/")
+        await axios.get("https://immo-app-hanchi-ahmed.herokuapp.com/api/expert/")
         .then(res =>{
             callback(res.data)
         })
@@ -85,7 +85,7 @@ export default class Service {
         })
     }
     async ExpertLoadOne( id , callback ){
-        await axios.get(`http://localhost:8081/api/expert/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/expert/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -95,7 +95,7 @@ export default class Service {
         })
     }
     async ExpertAdd( fullname ,mail , tel , password , callback ){
-        await axios.post("http://localhost:8081/api/expert/add", {
+        await axios.post("https://immo-app-hanchi-ahmed.herokuapp.com/api/expert/add", {
             fullname : fullname,
             tel : tel,
             email : mail,
@@ -110,7 +110,7 @@ export default class Service {
         })
     }
     async ExpertDelete( id , callback ){
-        await axios.delete(`http://localhost:8081/api/expert/${id}`)
+        await axios.delete(`https://immo-app-hanchi-ahmed.herokuapp.com/api/expert/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -120,7 +120,7 @@ export default class Service {
         })
     }
     async ExpertUpdate( fullname, mail ,tel , password , id , callback ){
-        await axios.put(`http://localhost:8081/api/expert/${id}`,{            
+        await axios.put(`https://immo-app-hanchi-ahmed.herokuapp.com/api/expert/${id}`,{            
             fullname : fullname,
             email : mail ,
             tel : tel,
@@ -136,7 +136,7 @@ export default class Service {
     }
 
     async UsersLoadAll( callback ){
-        await axios.get("http://localhost:8081/api/user/")
+        await axios.get("https://immo-app-hanchi-ahmed.herokuapp.com/api/user/")
         .then(res =>{
             callback(res.data)
         })
@@ -146,7 +146,7 @@ export default class Service {
         })
     }
     async UserLoadOne( id , callback ){
-        await axios.get(`http://localhost:8081/api/user/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/user/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -156,7 +156,7 @@ export default class Service {
         })
     }
     async LoadUser( id , callback ){
-        await axios.get(`http://localhost:8081/api/user/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/user/${id}`)
         .then(res =>{
             callback(res.data)
         })
@@ -166,7 +166,7 @@ export default class Service {
         })
     }
     async UserDelete( id , callback ){
-        await axios.delete(`http://localhost:8081/api/user/${id}`)
+        await axios.delete(`https://immo-app-hanchi-ahmed.herokuapp.com/api/user/${id}`)
         .then(res =>{
             callback(res)
         })
@@ -177,7 +177,7 @@ export default class Service {
     }
 
     async LoadTransactions( id  , callback ){
-        await axios.get(`http://localhost:8081/api/transaction/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/${id}`)
         .then( res => {
             callback(res.data)
         })
@@ -187,7 +187,7 @@ export default class Service {
         })
     }
     async LoadUserHouses( id , callback){
-        await axios.get(`http://localhost:8081/api/maison/user/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/user/${id}`)
         .then( res => {
             callback(res.data)
         })
@@ -197,7 +197,7 @@ export default class Service {
         })
     }
     async getAllLocation( callback ){
-        await axios.get(`http://localhost:8081/api/maison/location`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/location`)
         .then( res => {
             callback(res.data)
         })
@@ -207,7 +207,7 @@ export default class Service {
         })
     }   
     async getDemandesLocations( callback ){
-        await axios.get(`http://localhost:8081/api/transaction/location`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/location`)
         .then( res => {
             callback(res.data)
         })
@@ -217,7 +217,7 @@ export default class Service {
         })
     }
     async getAllVentes( callback ){
-        await axios.get(`http://localhost:8081/api/maison/vente`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/vente`)
         .then( res => {
             callback(res.data)
         })
@@ -227,7 +227,7 @@ export default class Service {
         })
     }   
     async getDemandesAchat( callback ){
-        await axios.get(`http://localhost:8081/api/transaction/achat`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/achat`)
         .then( res => {
             callback(res.data)
         })
@@ -237,7 +237,7 @@ export default class Service {
         })
     }
     async loadAnnonce( id , callback ){
-        await axios.get(`http://localhost:8081/api/maison/detail/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/detail/${id}`)
         .then( res => {
             callback(res.data)
         })
@@ -247,7 +247,7 @@ export default class Service {
         })
     }
     async LoadDemande( contrat , id , callback){
-        await axios.get(`http://localhost:8081/api/transaction/show/${contrat}/${id}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/show/${contrat}/${id}`)
         .then( res => {
             callback(res.data)
         })
@@ -257,7 +257,7 @@ export default class Service {
         })
     }
     async loadhousestoappraise( etat ,callback ){
-        await axios.get(`http://localhost:8081/api/maison/loadbystate/${etat}`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/loadbystate/${etat}`)
         .then( res => {
             callback(res.data)
         })
@@ -267,7 +267,7 @@ export default class Service {
         })
     } 
     async loadRentedHouses(callback){
-        await axios.get(`http://localhost:8081/api/maison/rented`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/rented`)
         .then( res => {
             callback(res.data)
         })
@@ -277,7 +277,7 @@ export default class Service {
         })
     }
     async loadSoldHouses(callback){
-        await axios.get(`http://localhost:8081/api/maison/sold`)
+        await axios.get(`https://immo-app-hanchi-ahmed.herokuapp.com/api/maison/sold`)
         .then( res => {
             callback(res.data)
         })
@@ -287,7 +287,7 @@ export default class Service {
         })
     }
     async setAffectation( houseId , expertId , dateDebutPlanif , dateFinPlanif , callback ){
-        await axios.post(`http://localhost:8081/api/evaluation/add`,{            
+        await axios.post(`https://immo-app-hanchi-ahmed.herokuapp.com/api/evaluation/add`,{            
             maisonId : houseId,
             expertId : expertId ,
             etat : 0,
@@ -304,7 +304,7 @@ export default class Service {
         })
     }
     async ValidateLocation( dateDebut , maisonId , id , callback ){
-        await axios.post(`http://localhost:8081/api/transaction/validate_location/${id}`,{            
+        await axios.post(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/validate_location/${id}`,{            
             maisonId : maisonId,
             dateDebut : dateDebut ,
         })
@@ -317,7 +317,7 @@ export default class Service {
         })
     }
     async ValidateVente( dateDebut , maisonId , id , callback ){
-        await axios.post(`http://localhost:8081/api/transaction/validate_vente/${id}`,{            
+        await axios.post(`https://immo-app-hanchi-ahmed.herokuapp.com/api/transaction/validate_vente/${id}`,{            
             maisonId : maisonId,
             dateDebut : dateDebut ,
         })

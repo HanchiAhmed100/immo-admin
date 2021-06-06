@@ -10,6 +10,12 @@
           </li> 
           -->
           <li class="nav-item">
+            <router-link class="nav-link" :to="{ name: 'Statistique' }">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title">Acceuil</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link class="nav-link" :to="{ name: 'Assignment' }">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Immobilier</span>

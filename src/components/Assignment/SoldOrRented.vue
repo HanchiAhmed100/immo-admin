@@ -25,7 +25,7 @@
                             <h4> Propriataire de l'immobilier : </h4>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <img style="width : 50px ; height : 50px" class="rounded-circle" :src="'http://localhost:8081/images/profile/'+house.user.image" alt="image"/>
+                                    <img style="width : 50px ; height : 50px" class="rounded-circle" :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+house.user.image" alt="image"/>
                                 </div>
                                 <div class="col-md-7 p-2 pl-4">
                                     <h4> 
@@ -55,7 +55,7 @@ export default {
     methods : {
         loadImage : function( data ){
             let array = data.split("|")
-            return 'http://localhost:8081/images/'+array[0]
+            return 'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+array[0]
         },
         setHouse : function( data ){
             this.house = data

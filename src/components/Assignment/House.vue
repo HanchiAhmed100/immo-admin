@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="row">
         <div class="col-sm-12">
             <div class="card p-2 my-2" v-for="( house , i ) in houses " :key="i">
@@ -25,7 +26,7 @@
                             <h4> Propriataire de l'immobilier : </h4>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <img style="width : 50px ; height : 50px" class="rounded-circle" :src="'http://localhost:8081/images/profile/'+house.user.image" alt="image"/>
+                                    <img style="width : 50px ; height : 50px" class="rounded-circle" :src="'https://immo-app-hanchi-ahmed.herokuapp.com/images/profile/'+house.user.image" alt="image"/>
                                 </div>
                                 <div class="col-md-7 p-2 pl-4">
                                     <h4> 
@@ -73,26 +74,26 @@
                         </div>
                     </div>
                 </div>
-            <div class="modal-content" v-if="etat == 1" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Details de  l'Affectation:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-left" >
-                    <div >
-                        <h4 >Evaluation Planifier entre le : </h4>
-                        <h4 v-if="house.evaluation"> {{ formateDate(house.evaluation.dateDebutPlanif) }} et {{ formateDate(house.evaluation.dateFinPlanif) }} </h4> 
-                        <h4 v-if="house.evaluation.expert.fullname"> Expert : {{ house.evaluation.expert.fullname }} </h4> 
-                        <h4 v-if="house.evaluation.expert.fullname"> Telephone : {{ house.evaluation.expert.tel }} </h4> 
-
+                <div class="modal-content" v-if="etat == 1" >
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Details de  l'Affectation:</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-left" >
+                        <div >
+                            <h4 >Evaluation Planifier entre le : </h4>
+                            <h4 v-if="house.evaluation"> {{ formateDate(house.evaluation.dateDebutPlanif) }} et {{ formateDate(house.evaluation.dateFinPlanif) }} </h4> 
+                            <h4 v-if="house.evaluation.expert.fullname"> Expert : {{ house.evaluation.expert.fullname }} </h4> 
+                            <h4 v-if="house.evaluation.expert.fullname"> Telephone : {{ house.evaluation.expert.tel }} </h4> 
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -129,7 +130,7 @@ export default {
         },
         loadImage : function( data ){
             let array = data.split("|")
-            return 'http://localhost:8081/images/'+array[0]
+            return 'https://immo-app-hanchi-ahmed.herokuapp.com/images/'+array[0]
         },
         setHouse : function( data ){
             this.house = data
